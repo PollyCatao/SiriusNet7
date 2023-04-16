@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SiriusTech.Data.Repositories
 {
-    public class RepositoryProdutoCliente : RepositoryBase<ProdutoCliente>, IRepositoryProdutoCliente
+    public class RepositoryTipoMovimentacao : RepositoryBase<TipoMovimentacao>, IRepositoryTipoMovimentacao
     {      
-        public RepositoryProdutoCliente(bool SaveChanges = true) : base(SaveChanges)
+        public RepositoryTipoMovimentacao(bool SaveChanges = true) : base(SaveChanges)
         {
                        
         }        

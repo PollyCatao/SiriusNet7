@@ -3,17 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SiriusTech.Web</title>
+    <title>@ViewData["Title"] - SiriusTech</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <link href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SiriusTech.Web.styles.css" asp-append-version="true" />
+    <link href="/css/all.min.css" rel="stylesheet" />
+    <link href="/css/fontawesome.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SiriusTech.Web</a>
+                <img id="logo" alt="Logo" src="https://scontent.fvix2-1.fna.fbcdn.net/v/t39.30808-6/300060601_481608900638965_5275915181330474501_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=9oDRhQOMeNYAX-VR2fD&_nc_ht=scontent.fvix2-1.fna&oh=00_AfCPJjE-KEvhn8Uo6burKCDy1iXzIPP1N0xn-xwiLLR4MQ&oe=6440B9C0" width="90" height="80" />
+                     
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,7 +26,22 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Empresa" asp-action="Index">Empresa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Soluções" asp-action="Index">Soluções</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Serviços" asp-action="Index">Serviços</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Index">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Portal</a>
                         </li>
                     </ul>
                 </div>
@@ -39,13 +56,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - SiriusTech.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - SiriusTech - Sistema para Gestão Empresarial 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/all.min.js"></script>
+    <script src="~/js/fontawesome.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -15,7 +15,31 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[dbo].[Cliente]",
+         "Name": "[dbo].[Boleto]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Cotacao]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Entidade]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Movimentacao]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MovimentacaoItem]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Ordem]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pedido]",
          "ObjectType": 0
       },
       {
@@ -23,8 +47,20 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Produto_Cliente]",
+         "Name": "[dbo].[TipoEntidade]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TipoMovimentacao]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TipoOrdem]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ViewMovimentacao]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "desktop-2riap0h\\mssqlsirius.SiriusTech.dbo",

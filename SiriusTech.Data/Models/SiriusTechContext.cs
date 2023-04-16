@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace SiriusTech.Data.Models
 {
@@ -18,32 +19,131 @@ namespace SiriusTech.Data.Models
         {
         }
 
-        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Boleto> Boleto { get; set; }
+        public virtual DbSet<Cotacao> Cotacao { get; set; }
+        public virtual DbSet<Entidade> Entidade { get; set; }
+        public virtual DbSet<Movimentacao> Movimentacao { get; set; }
+        public virtual DbSet<MovimentacaoItem> MovimentacaoItem { get; set; }
+        public virtual DbSet<Ordem> Ordem { get; set; }
+        public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
-        public virtual DbSet<ProdutoCliente> ProdutoCliente { get; set; }
+        public virtual DbSet<TipoEntidade> TipoEntidade { get; set; }
+        public virtual DbSet<TipoMovimentacao> TipoMovimentacao { get; set; }
+        public virtual DbSet<TipoOrdem> TipoOrdem { get; set; }
+        public virtual DbSet<ViewMovimentacao> ViewMovimentacao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-2RIAP0H\\MSSQLSIRIUS;Initial Catalog=SiriusTech;Persist Security Info=True;User ID=sa;Password=h1Y2n3F4;encrypt=yes;trustservercertificate=true;");
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                          .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                          .AddJsonFile("appsettings.json")
+                          .Build();
+
+                var stringConexao = configuration.GetConnectionString("Homologacao");
+
+                optionsBuilder.UseSqlServer(stringConexao);
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProdutoCliente>(entity =>
+            modelBuilder.Entity<Boleto>(entity =>
             {
-                entity.HasOne(d => d.IdClienteNavigation)
-                    .WithMany(p => p.ProdutoCliente)
-                    .HasForeignKey(d => d.IdCliente)
-                    .HasConstraintName("FK_Produto_Cliente_Cliente");
+                entity.Property(e => e.IdBoleto).ValueGeneratedNever();
+
+                entity.HasOne(d => d.IdMovimentacaoNavigation)
+                    .WithMany(p => p.Boleto)
+                    .HasForeignKey(d => d.IdMovimentacao)
+                    .HasConstraintName("FK_Boleto_Movimentação");
+            });
+
+            modelBuilder.Entity<Cotacao>(entity =>
+            {
+                entity.HasKey(e => e.IdCotacao)
+                    .HasName("PK_Cotação");
+            });
+
+            modelBuilder.Entity<Entidade>(entity =>
+            {
+                entity.HasKey(e => e.IdEntidade)
+                    .HasName("PK_Cliente");
+
+                entity.HasOne(d => d.IdTipoEntidadeNavigation)
+                    .WithMany(p => p.Entidade)
+                    .HasForeignKey(d => d.IdTipoEntidade)
+                    .HasConstraintName("FK_Entidade_TipoEntidade");
+            });
+
+            modelBuilder.Entity<Movimentacao>(entity =>
+            {
+                entity.HasKey(e => e.IdMovimentacao)
+                    .HasName("PK_Movimentação_1");
+
+                entity.HasOne(d => d.IdEntidadeNavigation)
+                    .WithMany(p => p.Movimentacao)
+                    .HasForeignKey(d => d.IdEntidade)
+                    .HasConstraintName("FK_Movimentação_Entidade");
+
+                entity.HasOne(d => d.IdTipoMovimentacaoNavigation)
+                    .WithMany(p => p.Movimentacao)
+                    .HasForeignKey(d => d.IdTipoMovimentacao)
+                    .HasConstraintName("FK_Movimentação_TipoMovimentacao1");
+            });
+
+            modelBuilder.Entity<MovimentacaoItem>(entity =>
+            {
+                entity.HasOne(d => d.IdCotacaoNavigation)
+                    .WithMany(p => p.MovimentacaoItem)
+                    .HasForeignKey(d => d.IdCotacao)
+                    .HasConstraintName("FK_MovimentacaoItem_Cotação");
+
+                entity.HasOne(d => d.IdMovimentacaoNavigation)
+                    .WithMany(p => p.MovimentacaoItem)
+                    .HasForeignKey(d => d.IdMovimentacao)
+                    .HasConstraintName("FK_MovimentacaoItem_Movimentação1");
+
+                entity.HasOne(d => d.IdOrdemNavigation)
+                    .WithMany(p => p.MovimentacaoItem)
+                    .HasForeignKey(d => d.IdOrdem)
+                    .HasConstraintName("FK_MovimentacaoItem_Ordem");
+
+                entity.HasOne(d => d.IdPedidoNavigation)
+                    .WithMany(p => p.MovimentacaoItem)
+                    .HasForeignKey(d => d.IdPedido)
+                    .HasConstraintName("FK_MovimentacaoItem_Pedido");
 
                 entity.HasOne(d => d.IdProdutoNavigation)
-                    .WithMany(p => p.ProdutoCliente)
+                    .WithMany(p => p.MovimentacaoItem)
                     .HasForeignKey(d => d.IdProduto)
-                    .HasConstraintName("FK_Produto_Cliente_Produto");
+                    .HasConstraintName("FK_MovimentacaoItem_Produto");
+            });
+
+            modelBuilder.Entity<Ordem>(entity =>
+            {
+                entity.HasOne(d => d.IdTipoOrdemNavigation)
+                    .WithMany(p => p.Ordem)
+                    .HasForeignKey(d => d.IdTipoOrdem)
+                    .HasConstraintName("FK_Ordem_TipoOrdem");
+            });
+
+            modelBuilder.Entity<Produto>(entity =>
+            {
+                entity.Property(e => e.IdFabricante).IsFixedLength();
+
+                entity.Property(e => e.Unidade).IsFixedLength();
+            });
+
+            modelBuilder.Entity<ViewMovimentacao>(entity =>
+            {
+                entity.ToView("ViewMovimentacao");
+
+                entity.HasKey(e => e.IdMovimentacao);
+
+                entity.Property(e => e.DcrEntidade).IsUnicode(false);
+
+                entity.Property(e => e.DcrTipoMovimentacao).IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

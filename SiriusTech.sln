@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiriusTech.Data", "SiriusTech.Data\SiriusTech.Data.csproj", "{99C3BD9B-9660-476B-90F1-5F1413D52EA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiriusTech.Data", "SiriusTech.Data\SiriusTech.Data.csproj", "{99C3BD9B-9660-476B-90F1-5F1413D52EA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiriusTech.Web", "SiriusTech.Web\SiriusTech.Web.csproj", "{3EEBBBA3-E4ED-44CC-A292-B731176869EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiriusTech.Web", "SiriusTech.Web\SiriusTech.Web.csproj", "{3EEBBBA3-E4ED-44CC-A292-B731176869EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

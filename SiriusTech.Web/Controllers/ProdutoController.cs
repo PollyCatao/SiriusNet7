@@ -49,7 +49,7 @@ namespace SiriusTech.Web.Controllers
         {
             Produto Produto = _produtoServices.repositoryProduto.Alterar(model);
 
-            int id = Produto.Id;
+            int id = Produto.IdProduto;
 
             return RedirectToAction("Details", new { id });
         }

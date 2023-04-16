@@ -8,29 +8,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SiriusTech.Data.Models
 {
-    public partial class Produto
+    public partial class Cotacao
     {
-        public Produto()
+        public Cotacao()
         {
             MovimentacaoItem = new HashSet<MovimentacaoItem>();
         }
 
         [Key]
-        [Column("idProduto")]
-        public int IdProduto { get; set; }
+        [Column("idCotacao")]
+        public int IdCotacao { get; set; }
         [Column("dataRegistro", TypeName = "datetime")]
         public DateTime? DataRegistro { get; set; }
-        [Column("dcrProduto")]
+        [Column("dcrCotacao")]
         [StringLength(50)]
-        public string DcrProduto { get; set; }
-        [Column("idFabricante")]
-        [StringLength(10)]
-        public string IdFabricante { get; set; }
-        [Column("unidade")]
-        [StringLength(10)]
-        public string Unidade { get; set; }
+        public string DcrCotacao { get; set; }
 
-        [InverseProperty("IdProdutoNavigation")]
+        [InverseProperty("IdCotacaoNavigation")]
         public virtual ICollection<MovimentacaoItem> MovimentacaoItem { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,3 +28,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+//optionsBuilder.UseSqlServer("Data Source=DESKTOP-2RIAP0H\\MSSQLSIRIUS;Initial Catalog=SiriusTech;Persist Security Info=True;User ID=sa;Password=h1Y2n3F4;encrypt=yes;trustservercertificate=true;");

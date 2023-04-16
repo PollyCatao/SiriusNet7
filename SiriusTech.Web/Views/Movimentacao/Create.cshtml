@@ -1,0 +1,182 @@
+﻿@model MovimentacaoViewModel
+
+<h4>ViewMovimentacao</h4>
+<hr />
+<div>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div hidden class="form-group">              
+                <input id="idEntidade" asp-for="movimentacao.IdEntidade" class="form-control" />
+            </div>
+            <div hidden class="form-group">
+                <input id="idTipoMovimentacao" asp-for="movimentacao.IdTipoMovimentacao" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="movimentacao.IdMovimentacao" class="control-label"></label>
+                <input asp-for="movimentacao.IdMovimentacao" class="form-control" />
+                <span asp-validation-for="movimentacao.IdMovimentacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movimentacao.DataRegistro" class="control-label"></label>
+                <input asp-for="movimentacao.DataRegistro" class="form-control" />
+                <span asp-validation-for="movimentacao.DataRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movimentacao.DcrMovimentacao" class="control-label"></label>
+                <input asp-for="movimentacao.DcrMovimentacao" class="form-control" />
+                <span asp-validation-for="movimentacao.DcrMovimentacao" class="text-danger"></span>
+            </div>
+            <table id="listEntidadeTable" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.entidade.IdEntidade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.entidade.DataRegistro)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.entidade.DcrEntidade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.entidade.CpfCnpj)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.entidade.DcrCep)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.entidade.DcrEndereco)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.listEntidade)
+                    {
+                        <tr onclick="passIdCliente(" @item.IdEntidade")">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdEntidade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRegistro)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DcrEntidade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CpfCnpj)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DcrCep)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DcrEndereco)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <table id="listTipoMovimentacaoTable" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoMovimentacao.IdTipoMovimentacao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoMovimentacao.DataRegistro)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoMovimentacao.DcrTipoMovimentacao)
+                        </th>                      
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.listTipoMovimentacao)
+                    {
+                        <tr onclick ="passIdTipoMovimentacao(" @item.IdTipoMovimentacao")">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdTipoMovimentacao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRegistro)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DcrTipoMovimentacao)
+                            </td>                          
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Incluir" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+          $(document).ready(function () {
+            var listEntidadeTable = $('#listEntidadeTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+
+            var listTipoMovimentacaoTable = $('#listTipoMovimentacaoTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });      
+
+            //Tabela Cliente
+
+            $('#listEntidadeTable tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    listEntidadeTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                }
+            });
+
+            // Tabela Livro
+
+            $('#listTipoMovimentacaoTable tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    listTipoMovimentacaoTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+
+        });
+
+
+        function passIdEntidade(idEntidade) {
+            console.log(idCliente)
+            document.getElementById('idEntidade').value = idEntidade;
+        }
+
+        function passIdTipoMovimentacao(idTipoMovimentacao) {
+            console.log(idTipoMovimentacao)
+            document.getElementById('idTipoMovimentacao').value = idTipoMovimentacao;
+        }
+
+
+
+        });
+    </script>
+}
+

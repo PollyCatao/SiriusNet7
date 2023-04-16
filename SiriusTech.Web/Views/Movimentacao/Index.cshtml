@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SiriusTech.Data.Models.ViewMovimentacao>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DcrTipoMovimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DcrEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DcrMovimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoMovimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEntidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DcrTipoMovimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DcrEntidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DcrMovimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoMovimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEntidade)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdMovimentacao">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdMovimentacao">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMovimentacao">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

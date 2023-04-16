@@ -1,0 +1,198 @@
+﻿@model MovimentacaoViewModel
+
+<h4>Alterar Movimentacao</h4>
+<p>
+    <a class="btn btn-primary" asp-action="Index"> <i class="fa fa-arrow-left"></i> Voltar</a>
+</p>
+<hr />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+
+            <div class="card">
+                <div class="card-header">Entidade</div>
+                <div class="card-body">
+                    <table id="listEntidadeTable" class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entidade.IdEntidade)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entidade.DataRegistro)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entidade.DcrEntidade)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entidade.CpfCnpj)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entidade.DcrCep)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entidade.DcrEndereco)
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.listEntidade)
+                            {
+                                <tr onclick="passIdEntidade(" @item.IdEntidade")">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdEntidade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DataRegistro)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DcrEntidade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CpfCnpj)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DcrCep)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DcrEndereco)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">TipoMovimentacao</div>
+                <div class="card-body">
+                    <table id="listTipoMovimentacaoTable" class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tipoMovimentacao.IdTipoMovimentacao)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tipoMovimentacao.DataRegistro)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tipoMovimentacao.DcrTipoMovimentacao)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.listTipoMovimentacao)
+                            {
+                                <tr onclick="passIdTipoMovimentacao(" @item.IdTipoMovimentacao")">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdTipoMovimentacao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DataRegistro)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DcrTipoMovimentacao)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">Datas</div>
+                <div class="card-body row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label asp-for="dcrMovimentacao" class="control-label"></label>
+                            <input readonly="readonly" asp-for="dcrMovimentacao" class="form-control" />
+                            <span asp-validation-for="dcrMovimentacao" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label asp-for="dataRegistro" class="control-label"></label>
+                            <input asp-for="dataRegistro" class="form-control" />
+                            <span asp-validation-for="dataRegistro" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Alterar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var listEntidadeTable = $('#listEntidadeTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+
+            var listTipoMovimentacaoTable = $('#listTipoMovimentacaoTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+
+
+            //Tabela Entidade
+
+            $('#listEntidadeTable tbody').on('click', 'tr', function () {
+
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    listEntidadeTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                }
+            });
+
+            $('#listEntidadeTable tbody tr td').filter(":contains('" + @Model.idEntidade +"')")[0].parentElement.setAttribute('class', 'selected');
+
+
+
+            // Tabela TipoMovimentacao
+
+            $('#listTipoMovimentacaoTable tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    listTipoMovimentacaoTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#listTipoMovimentacaoTable tbody tr td').filter(":contains('" + @Model.idTipoMovimentacao +"')")[0].parentElement.setAttribute('class', 'selected');
+        });
+
+
+        function passIdEntidade(idEntidade) {
+            document.getElementById('idEntidade').value = idEntidade;
+        }
+
+        function passIdTipoMovimentacao(idTipoMovimentacao) {
+            document.getElementById('idTipoMovimentacao').value = idTipoMovimentacao;
+        }
+
+    </script>
+}
+
