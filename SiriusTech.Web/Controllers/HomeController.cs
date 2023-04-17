@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SiriusTech.Web.Models;
+using SiriusTech.Data.Models;
 using System.Diagnostics;
 
 namespace SiriusTech.Web.Controllers

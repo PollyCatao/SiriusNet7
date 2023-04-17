@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SiriusTech.Data.Models;
 using SiriusTech.Data.Services;
-using SiriusTech.Web.Models;
+using SiriusTech.Data.Models;
 
 namespace SiriusTech.Web.Controllers
 {

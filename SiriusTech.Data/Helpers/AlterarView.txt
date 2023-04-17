@@ -1,0 +1,7 @@
+
+ALTER VIEW ViewMovimentacao
+AS
+SELECT        TipMov.dcrTipoMovimentacao, Ent.dcrEntidade, Mov.idMovimentacao, Mov.dataRegistro, Mov.dcrMovimentacao, Mov.idTipoMovimentacao, Mov.idEntidade
+FROM            dbo.Movimentacao AS Mov INNER JOIN
+                         dbo.Entidade AS Ent ON Ent.idEntidade = Mov.idEntidade INNER JOIN
+                         dbo.TipoMovimentacao AS TipMov ON TipMov.idTipoMovimentacao = Mov.idTipoMovimentacao
